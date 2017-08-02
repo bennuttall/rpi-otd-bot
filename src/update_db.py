@@ -1,7 +1,7 @@
 import requests
-from db import PiBlogDatabase
+from db import RPiBlogDatabase
 
-db = PiBlogDatabase()
+db = RPiBlogDatabase()
 
 url = 'https://www.raspberrypi.org/wp-json/wp/v2/posts?per_page=100'
 
@@ -15,5 +15,6 @@ while posts:
         slug = post['slug']
         title = post['title']['rendered']
         pub_date = post['date']
+        print('Adding {}'.format(slug))
         db.insert_post(slug, title, pub_date)
     page += 1

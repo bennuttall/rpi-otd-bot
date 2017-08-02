@@ -20,7 +20,7 @@ class RPiBlogDatabase:
             with self.conn.cursor() as cur:
                 cur.execute(query, values)
 
-    def get_posts_on_date(self, month=month, day=day):
+    def get_posts_on_date(self, month, day):
         query = """
         SELECT
             slug, title, EXTRACT(YEAR FROM pub_date) AS year

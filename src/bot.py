@@ -2,6 +2,7 @@ from twython import Twython
 import os
 import random
 from datetime import datetime
+import html
 from db import RPiBlogDatabase
 
 twitter = Twython(
@@ -20,10 +21,11 @@ posts = db.get_posts_on_date(month=month, day=day)
 
 post = random.choice(posts)
 
-year = post['year']
-title = post['title']
+year = int(post['year'])
+title = html.unescape(post['title'])
 slug = post['slug']
 url = 'https://www.raspberrypi.org/blog/{}'.format(slug)
 
 tweet = "On this day in {}: {} {}".format(year, title, url)
+print('Tweeting: {}'.format(tweet))
 twitter.update_status(status=tweet)
