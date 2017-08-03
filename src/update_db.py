@@ -15,7 +15,7 @@ while posts:
         slug = post['slug']
         title = post['title']['rendered']
         pub_date = post['date']
-        if db.get_post(slug):
+        if db.get_post_by_slug(slug):
             posts = False
         else:
             print('Adding {}'.format(slug))

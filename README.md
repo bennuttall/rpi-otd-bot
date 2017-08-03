@@ -21,6 +21,7 @@ sudo pip3 install twython psycopg2
 - Run the import script:
     - `cat rpiblog.sql | psql rpi_otd`
 - Run `python3 update_db.py` with Python initially to populate the database
-- Add it to cron daily so it keeps up-to-date
+- Add it to cron daily so it keeps the database up-to-date
 - Run `bot.py` to test it works - you should see it posts a single tweet
-- Add it to cron daily to tweet every day
+- Add it to cron hourly between 9am and 3pm to tweet every day
+    - The year looked up is 2002 + the current hour, so 9am = 2011

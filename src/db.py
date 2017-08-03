@@ -20,7 +20,7 @@ class RPiBlogDatabase:
             with self.conn.cursor() as cur:
                 cur.execute(query, values)
 
-    def get_post(self, slug):
+    def get_post_by_slug(self, slug):
         query = """
         SELECT
             1
@@ -35,19 +35,17 @@ class RPiBlogDatabase:
                 cur.execute(query, values)
                 return cur.fetchone()
 
-    def get_posts_on_date(self, month, day):
+    def get_post_by_date(self, date):
         query = """
         SELECT
-            slug, title, EXTRACT(YEAR FROM pub_date) AS year
+            slug, title
         FROM
             rpi_posts
         WHERE
-            EXTRACT(MONTH FROM pub_date) = %s
-        AND
-            EXTRACT(DAY FROM pub_date) = %s
+            pub_date::date = date %s
         """
-        values = (month, day)
+        values = (date, )
         with self.conn:
             with self.conn.cursor() as cur:
                 cur.execute(query, values)
-                return cur.fetchall()
+                return cur.fetchone()
