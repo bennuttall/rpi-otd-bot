@@ -15,6 +15,9 @@ while posts:
         slug = post['slug']
         title = post['title']['rendered']
         pub_date = post['date']
-        print('Adding {}'.format(slug))
-        db.insert_post(slug, title, pub_date)
+        if db.get_post(slug):
+            posts = False
+        else:
+            print('Adding {}'.format(slug))
+            db.insert_post(slug, title, pub_date)
     page += 1

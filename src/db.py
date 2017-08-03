@@ -20,6 +20,21 @@ class RPiBlogDatabase:
             with self.conn.cursor() as cur:
                 cur.execute(query, values)
 
+    def get_post(self, slug):
+        query = """
+        SELECT
+            1
+        FROM
+            rpi_posts
+        WHERE
+            slug = %s
+        """
+        values = (slug, )
+        with self.conn:
+            with self.conn.cursor() as cur:
+                cur.execute(query, values)
+                return cur.fetchone()
+
     def get_posts_on_date(self, month, day):
         query = """
         SELECT
