@@ -2,6 +2,8 @@
 
 A Twitter bot which tweets "on this day" blog posts from Raspberry Pi's blog archive: [@raspberrypi_otd](https://twitter.com/raspberrypi_otd)
 
+![](made-in-the-uk.png)
+
 ## Requirements
 
 - Twython
