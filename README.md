@@ -6,8 +6,9 @@ A Twitter bot which tweets "on this day" blog posts from Raspberry Pi's blog arc
 
 ## Requirements
 
-- Twython
 - Postgresql
+- Twython
+- psycopg2
 
 ```bash
 sudo apt install postgresql libpq-dev postgresql-client postgresql-client-common
