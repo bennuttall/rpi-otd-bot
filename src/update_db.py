@@ -12,9 +12,13 @@ while posts:
     request = '{}&page={}'.format(url, page)
     posts = requests.get(request).json()
     for post in posts:
-        slug = post['slug']
-        title = post['title']['rendered']
-        pub_date = post['date']
+        try:
+            slug = post['slug']
+            title = post['title']['rendered']
+            pub_date = post['date']
+        except TypeError:
+            posts = None
+            break
         if db.get_post_by_slug(slug):
             posts = False
         else:
