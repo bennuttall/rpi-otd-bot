@@ -11,7 +11,7 @@ A Twitter bot which tweets "on this day" blog posts from Raspberry Pi's blog arc
 
 ```bash
 sudo apt install postgresql libpq-dev postgresql-client postgresql-client-common
-sudo pip3 install twython psycopg2
+sudo pip3 install twython psycopg2-binary
 ```
 
 ## Usage
