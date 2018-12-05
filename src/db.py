@@ -35,7 +35,7 @@ class RPiBlogDatabase:
                 cur.execute(query, values)
                 return cur.fetchone()
 
-    def get_post_by_date(self, date):
+    def get_posts_by_date(self, date):
         query = """
         SELECT
             slug, title
@@ -48,4 +48,4 @@ class RPiBlogDatabase:
         with self.conn:
             with self.conn.cursor() as cur:
                 cur.execute(query, values)
-                return cur.fetchone()
+                return cur.fetchall()

@@ -18,9 +18,9 @@ month = now.date().month
 day = now.date().day
 year = 2002 + now.time().hour  # 9am = 2011
 post_date = date(year, month, day)
-post = db.get_post_by_date(post_date)
+posts = db.get_posts_by_date(post_date)
 
-if post:
+for post in posts:
     title = html.unescape(post['title'])
     slug = post['slug']
     url = 'https://www.raspberrypi.org/blog/{}'.format(slug)
@@ -28,3 +28,4 @@ if post:
     tweet = "On this day in {}: {} {}".format(year, title, url)
     print('Tweeting: {}'.format(tweet))
     twitter.update_status(status=tweet)
+    sleep(60)
