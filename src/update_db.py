@@ -1,4 +1,5 @@
 import requests
+
 from db import RPiBlogDatabase
 
 db = RPiBlogDatabase()
@@ -9,7 +10,7 @@ posts = True
 page = 1
 
 while posts:
-    request = '{}&page={}'.format(url, page)
+    request = f'{url}&page={page}'
     posts = requests.get(request).json()
     for post in posts:
         try:
@@ -22,6 +23,6 @@ while posts:
         if db.get_post_by_slug(slug):
             posts = False
         else:
-            print('Adding {}'.format(slug))
+            print(f'Adding {slug}')
             db.insert_post(slug, title, pub_date)
     page += 1
