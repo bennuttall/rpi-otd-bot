@@ -4,14 +4,16 @@ from db import RPiBlogDatabase
 
 db = RPiBlogDatabase()
 
-url = 'https://www.raspberrypi.org/wp-json/wp/v2/posts?per_page=100'
+url = 'https://www.raspberrypi.org/wp-json/wp/v2/posts'
+params = {
+    'per_page': 100,
+    'page': 1,
+}
 
 posts = True
-page = 1
 
 while posts:
-    request = f'{url}&page={page}'
-    posts = requests.get(request).json()
+    posts = requests.get(url, params).json()
     for post in posts:
         try:
             slug = post['slug']
@@ -25,4 +27,4 @@ while posts:
         else:
             print(f'Adding {slug}')
             db.insert_post(slug, title, pub_date)
-    page += 1
+    params['page'] += 1
