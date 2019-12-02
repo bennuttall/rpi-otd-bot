@@ -1,6 +1,7 @@
 import os
 from datetime import date, datetime
 import html
+from time import sleep
 
 from twython import Twython
 from db import RPiBlogDatabase
