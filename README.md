@@ -26,8 +26,8 @@ and add them to `auth.py` (**Do not publish these on your GitHub**)
 - Set up postgres (see [fullstackpython](https://www.fullstackpython.com/blog/postgresql-python-3-psycopg2-ubuntu-1604.html))
 - Create a database called `rpi_otd`
 - Run the import script:
-    - `cat rpiblog.sql | psql rpi_otd`
-- Run `python3 update_db.py` with Python initially to populate the database
+    - `psql rpi_otd -f rpiblog.sql`
+- Run `python3 update_db.py` initially to populate the database
 - Add it to cron daily so it keeps the database up-to-date
 - Run `bot.py` to test it works - you should see it posts a single tweet
 - Add it to cron hourly to tweet every matching hour every day
