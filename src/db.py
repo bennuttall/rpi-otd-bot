@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2.extras import DictCursor
 
+
 class RPiBlogDatabase:
     def __init__(self):
         self.conn = psycopg2.connect(
@@ -8,11 +9,11 @@ class RPiBlogDatabase:
             cursor_factory=DictCursor
         )
 
-    def insert_post(self, slug, title, pub_date):
-        values = (slug, title, pub_date)
+    def insert_post(self, url, title, pub_date):
+        values = (url, title, pub_date)
         query = """
         INSERT INTO
-            rpi_posts (slug, title, pub_date)
+            rpi_posts (url, title, pub_date)
         VALUES
             (%s, %s, %s)
         """
@@ -20,16 +21,16 @@ class RPiBlogDatabase:
             with self.conn.cursor() as cur:
                 cur.execute(query, values)
 
-    def get_post_by_slug(self, slug):
+    def get_post_by_url(self, url):
         query = """
         SELECT
             1
         FROM
             rpi_posts
         WHERE
-            slug = %s
+            url = %s
         """
-        values = (slug, )
+        values = (url, )
         with self.conn:
             with self.conn.cursor() as cur:
                 cur.execute(query, values)
@@ -38,7 +39,7 @@ class RPiBlogDatabase:
     def get_posts_by_date(self, date):
         query = """
         SELECT
-            slug, title
+            url, title
         FROM
             rpi_posts
         WHERE

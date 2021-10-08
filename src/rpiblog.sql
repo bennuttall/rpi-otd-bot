@@ -1,5 +1,5 @@
 CREATE TABLE rpi_posts (
-	slug TEXT PRIMARY KEY,
+	url TEXT PRIMARY KEY,
 	title TEXT,
 	pub_date TIMESTAMP
 );

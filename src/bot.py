@@ -1,4 +1,3 @@
-import os
 from datetime import date, datetime
 import html
 from time import sleep
@@ -26,10 +25,9 @@ posts = db.get_posts_by_date(post_date)
 
 for post in posts:
     title = html.unescape(post['title'])
-    slug = post['slug']
-    url = f'https://www.raspberrypi.org/blog/{slug}'
+    url = post['url']
 
-    tweet = f'On this day in {year}: {title} {url}'
-    print(f'Tweeting: {tweet}')
+    tweet = f"On this day in {year}: {title} {url}"
+    print(f"Tweeting: {tweet}")
     twitter.update_status(status=tweet)
     sleep(60)

@@ -3,6 +3,8 @@
 A Twitter bot which tweets "on this day" blog posts from Raspberry Pi's blog
 archive: [@raspberrypi_otd](https://twitter.com/raspberrypi_otd)
 
+Updated October 2021 to cover both raspberrypi.com and raspberrypi.org
+
 ![](made-in-the-uk.png)
 
 ## Requirements
