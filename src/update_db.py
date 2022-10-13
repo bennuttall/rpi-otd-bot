@@ -1,20 +1,24 @@
 import sys
 from json.decoder import JSONDecodeError
+from datetime import datetime
 
 import requests
 from requests import RequestException
+from structlog import get_logger
 
 from db import RPiBlogDatabase
 
 
-db = RPiBlogDatabase()
+db = RPiBlogDatabase('db.sqlite')
+logger = get_logger()
 
-urls = [
+URLS = [
     'https://www.raspberrypi.com/wp-json/wp/v2/posts',
     'https://www.raspberrypi.org/wp-json/wp/v2/posts',
 ]
 
 first_run = len(sys.argv) > 1 and sys.argv[1] == '--first-run'
+
 
 def get_posts(url, page=1):
     params = {
@@ -26,24 +30,25 @@ def get_posts(url, page=1):
         response.raise_for_status()
         return response.json()
     except (RequestException, JSONDecodeError) as exc:
-        print(exc)
+        logger.exception(exc)
         return []
 
+
 if __name__ == '__main__':
-    for url in urls:
+    for url in URLS:
         page = 1
         posts = True
 
         while posts:
-            print("Fetching posts from {}, page {}".format(url, page))
+            logger.info("Fetching posts", url=url, page=page)
             posts = get_posts(url, page)
             for post in posts:
                 slug = post['slug']
                 link = post['link']
                 title = post['title']['rendered']
-                pub_date = post['date']
-                if first_run or not db.get_post_by_url(link):
-                    print(f"Adding {slug}")
+                pub_date = datetime.fromisoformat(post['date'])
+                if first_run or not db.post_in_db(link):
+                    logger.info("Adding post", slug=slug)
                     db.insert_post(link, title, pub_date)
                 else:
                     posts = False

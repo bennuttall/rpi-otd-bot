@@ -3,9 +3,11 @@ import html
 from time import sleep
 
 from twython import Twython
-from db import RPiBlogDatabase
+from structlog import get_logger
 
+from db import RPiBlogDatabase
 from auth import *
+
 
 twitter = Twython(
     consumer_key,
@@ -14,7 +16,8 @@ twitter = Twython(
     access_token_secret
 )
 
-db = RPiBlogDatabase()
+db = RPiBlogDatabase('db.sqlite')
+logger = get_logger()
 
 now = datetime.now()
 month = now.date().month
@@ -28,6 +31,6 @@ for post in posts:
     url = post['url']
 
     tweet = f"On this day in {year}: {title} {url}"
-    print(f"Tweeting: {tweet}")
+    logger.info("Tweeting:", tweet=tweet)
     twitter.update_status(status=tweet)
     sleep(60)
