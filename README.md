@@ -14,8 +14,7 @@ Updated October 2021 to cover both raspberrypi.com and raspberrypi.org
 - structlog
 
 ```bash
-sudo apt install postgresql libpq-dev postgresql-client postgresql-client-common
-sudo pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Usage
