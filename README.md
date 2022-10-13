@@ -5,7 +5,7 @@ archive: [@raspberrypi_otd](https://twitter.com/raspberrypi_otd)
 
 Updated October 2021 to cover both raspberrypi.com and raspberrypi.org
 
-![](made-in-the-uk.png)
+[![](made-in-the-uk.png)](https://twitter.com/raspberrypi_otd/status/905360429362372608)
 
 ## Requirements
 
